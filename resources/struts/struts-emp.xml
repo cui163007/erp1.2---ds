@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<package name="emp" namespace="/emp" extends="global">
+		
+		<action name="*" class="empAction" method="{1}">
+			<result name="changePwd">/WEB-INF/jsps/emp/changePwd.jsp</result>
+		</action>
+	</package>
+
+</struts>

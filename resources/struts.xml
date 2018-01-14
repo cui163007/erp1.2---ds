@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<package name="login" extends="json-default">
+		<!-- 拦截器不拦截登录的请求 -->
+		<action name="login" class="empAction" method="login">
+			<result name="main">/WEB-INF/jsps/main.jsp</result>
+			<result name="login">/jsps/login.jsp</result>
+		</action> 
+	</package>
+	<package name="global" extends="json-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.jiyun.erp.interceptors.LoginInterceptor"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="loginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		
+		<!-- 全局返回 -->
+		<global-results>
+			<result name="main">/WEB-INF/jsps/main.jsp</result>
+			<result name="login">/jsps/login.jsp</result>
+		</global-results>
+	</package>
+	
+	<include file="struts/struts-*.xml"></include>
+</struts>
